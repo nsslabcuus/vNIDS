@@ -1,0 +1,29 @@
+{
+    "00:00:74:a0:2f:5f:17:e4": [
+        {
+            "client-server": {
+                "command": "ADD",
+                "cookie": "45035997289827798",
+                "cookieMask": "0",
+                "flags": "1",
+                "hardTimeoutSec": "0",
+                "idleTimeoutSec": "0",
+                "instructions": {
+                    "instruction_apply_actions": {
+                        "actions": "output=2"
+                    }
+                },
+                "match": {
+                    "eth_dst": "a0:ec:f9:e8:ac:69",
+                    "eth_src": "a0:ec:f9:e8:a4:72",
+                    "eth_type": "0x0x800",
+                    "in_port": "2"
+                },
+                "outGroup": "any",
+                "outPort": "any",
+                "priority": "-32768",
+                "version": "OF_13"
+            }
+        }
+    ]
+}

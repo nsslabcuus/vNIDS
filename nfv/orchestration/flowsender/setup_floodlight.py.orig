@@ -1,0 +1,133 @@
+#!/usr/bin/env python
+# coding=utf-8
+
+import httplib
+import json
+import subprocess 
+
+
+class StaticFlowPusher(object):
+
+    def __init__(self, server):
+        self.server = server
+
+    def get(self, data):
+        ret = self.rest_call({}, 'GET')
+        return json.loads(ret[2])
+
+    def set(self, data):
+        ret = self.rest_call(data, 'POST')
+        return ret[0] == 200
+
+    def remove(self, objtype, data):
+        ret = self.rest_call(data, 'DELETE')
+        return ret[0] == 200
+    
+    def clear(self):
+        subprocess.call(["curl", "http://10.10.1.4:8080/wm/staticflowpusher/clear/00:00:74:a0:2f:5f:17:e4/json"]) 
+    
+    def list(self, data):
+        ret = self.rest_call(data, 'LIST')
+        return ret[0] == 200
+
+    def rest_call(self, data, action):
+        if action is 'CLEAR' :
+            path = '/wm/staticflowpusher/clear/00:00:74:a0:2f:5f:17:e4/json'
+        elif action is 'LIST' :
+            path = '/wm/staticflowpusher/list/00:00:74:a0:2f:5f:17:e4/json'
+        else: 
+            path = '/wm/staticflowpusher/json'
+        
+        headers = {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+        }
+        body = json.dumps(data)
+        conn = httplib.HTTPConnection(self.server, 8080)
+        conn.request(action, path, body, headers)
+        response = conn.getresponse()
+        ret = (response.status, response.reason, response.read())
+        print ret
+        conn.close()
+        return ret
+
+pusher = StaticFlowPusher('10.10.1.4')
+
+# Any thing outside the machine to localhost. 
+flow1 = {
+    "switch": "00:00:74:a0:2f:5f:17:e4", 
+    "name":"out-localhost", 
+    "cookie":"1", 
+    "priority":"32768", 
+    "eth_vlan_vid":"0x000",
+    # to localhost.
+    "eth_dst":"74:a0:2f:5f:17:e4", 
+    "active":"true",
+    # Send to clickos
+    "actions":"pop_vlan,output=LOCAL"
+}
+# Any thing inside the machine to localhost. 
+flow2 = {
+    "switch": "00:00:74:a0:2f:5f:17:e4", 
+    "name":"in-localhost", 
+    "cookie":"2", 
+    "priority":"32768", 
+    # to localhost.
+    "eth_dst":"74:a0:2f:5f:17:e4", 
+    "active":"true",
+    "actions":"output=LOCAL"
+}
+
+# Any thing outside the machine to client 
+flow3 = {
+    "switch": "00:00:74:a0:2f:5f:17:e4", 
+    "name":"out-client", 
+    "cookie":"3", 
+    "eth_vlan_vid":"0x000",
+    # to client 
+    "eth_dst":"a0:ec:f9:e8:ac:69", 
+    "active":"true",
+    "actions":"pop_vlan,output=1"
+}
+
+# Any thing inside the machine to client 
+flow4 = {
+    "switch": "00:00:74:a0:2f:5f:17:e4", 
+    "name":"in-client", 
+    "cookie":"4", 
+    # to client 
+    "eth_dst":"a0:ec:f9:e8:ac:69", 
+    "active":"true",
+    "actions":"output=1"
+}
+
+# Any thing outside the machine to server 
+flow5 = {
+    "switch": "00:00:74:a0:2f:5f:17:e4", 
+    "name":"out-server", 
+    "cookie":"5", 
+    "eth_vlan_vid":"0x000",
+    # to server 
+    "eth_dst":"a0:ec:f9:e8:a4:72",
+    "active":"true",
+    "actions":"pop_vlan,output=2"
+}
+
+# Any thing inside the machine to server 
+flow6 = {
+    "switch": "00:00:74:a0:2f:5f:17:e4", 
+    "name":"in-server", 
+    "cookie":"6", 
+    # to server 
+    "eth_dst":"a0:ec:f9:e8:a4:72",
+    "active":"true",
+    "actions":"output=2"
+}
+
+pusher.set(flow1)
+pusher.set(flow2)
+pusher.set(flow3)
+pusher.set(flow4)
+pusher.set(flow5)
+pusher.set(flow6)
+

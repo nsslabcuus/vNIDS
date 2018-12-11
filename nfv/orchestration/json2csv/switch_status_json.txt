@@ -1,0 +1,141 @@
+{
+    "00:00:00:00:00:00:00:01": {
+        "flows": [
+            {
+                "actions": {
+                    "actions": "output=1"
+                },
+                "byteCount": "5488",
+                "cookie": "9007199254740992",
+                "durationSeconds": "56",
+                "hardTimeoutSec": "0",
+                "idleTimeoutSec": "5",
+                "match": {
+                    "eth_dst": "92:0b:b5:5a:cf:4f",
+                    "eth_src": "9e:d1:46:d8:ea:0b",
+                    "eth_type": "0x0x800",
+                    "in_port": "2",
+                    "ipv4_dst": "10.0.0.1",
+                    "ipv4_src": "10.0.0.2"
+                },
+                "packetCount": "56",
+                "priority": "1",
+                "tableId": "0x0",
+                "version": "OF_10"
+            },
+            {
+                "actions": {
+                    "actions": "output=2"
+                },
+                "byteCount": "5572",
+                "cookie": "45035997351236006",
+                "durationSeconds": "99",
+                "hardTimeoutSec": "0",
+                "idleTimeoutSec": "0",
+                "match": {
+                    "in_port": "1"
+                },
+                "packetCount": "58",
+                "priority": "32768",
+                "tableId": "0x0",
+                "version": "OF_10"
+            }
+        ]
+    },
+    "00:00:00:00:00:00:00:02": {
+        "flows": [
+            {
+                "actions": {
+                    "actions": "output=2"
+                },
+                "byteCount": "5390",
+                "cookie": "9007199254740992",
+                "durationSeconds": "56",
+                "hardTimeoutSec": "0",
+                "idleTimeoutSec": "5",
+                "match": {
+                    "eth_dst": "9e:d1:46:d8:ea:0b",
+                    "eth_src": "92:0b:b5:5a:cf:4f",
+                    "eth_type": "0x0x800",
+                    "in_port": "1",
+                    "ipv4_dst": "10.0.0.2",
+                    "ipv4_src": "10.0.0.1"
+                },
+                "packetCount": "55",
+                "priority": "1",
+                "tableId": "0x0",
+                "version": "OF_10"
+            },
+            {
+                "actions": {
+                    "actions": "output=1"
+                },
+                "byteCount": "5488",
+                "cookie": "9007199254740992",
+                "durationSeconds": "56",
+                "hardTimeoutSec": "0",
+                "idleTimeoutSec": "5",
+                "match": {
+                    "eth_dst": "92:0b:b5:5a:cf:4f",
+                    "eth_src": "9e:d1:46:d8:ea:0b",
+                    "eth_type": "0x0x800",
+                    "in_port": "2",
+                    "ipv4_dst": "10.0.0.1",
+                    "ipv4_src": "10.0.0.2"
+                },
+                "packetCount": "56",
+                "priority": "1",
+                "tableId": "0x0",
+                "version": "OF_10"
+            }
+        ]
+    },
+    "00:00:00:00:00:00:00:03": {
+        "flows": [
+            {
+                "actions": {
+                    "actions": "output=2"
+                },
+                "byteCount": "5488",
+                "cookie": "9007199254740992",
+                "durationSeconds": "56",
+                "hardTimeoutSec": "0",
+                "idleTimeoutSec": "5",
+                "match": {
+                    "eth_dst": "9e:d1:46:d8:ea:0b",
+                    "eth_src": "92:0b:b5:5a:cf:4f",
+                    "eth_type": "0x0x800",
+                    "in_port": "1",
+                    "ipv4_dst": "10.0.0.2",
+                    "ipv4_src": "10.0.0.1"
+                },
+                "packetCount": "56",
+                "priority": "1",
+                "tableId": "0x0",
+                "version": "OF_10"
+            },
+            {
+                "actions": {
+                    "actions": "output=1"
+                },
+                "byteCount": "5390",
+                "cookie": "9007199254740992",
+                "durationSeconds": "56",
+                "hardTimeoutSec": "0",
+                "idleTimeoutSec": "5",
+                "match": {
+                    "eth_dst": "92:0b:b5:5a:cf:4f",
+                    "eth_src": "9e:d1:46:d8:ea:0b",
+                    "eth_type": "0x0x800",
+                    "in_port": "2",
+                    "ipv4_dst": "10.0.0.1",
+                    "ipv4_src": "10.0.0.2"
+                },
+                "packetCount": "55",
+                "priority": "1",
+                "tableId": "0x0",
+                "version": "OF_10"
+            }
+        ]
+    }
+}
