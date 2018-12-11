@@ -1,0 +1,53 @@
+DiGraph G {
+node [shape=box]
+FromDevice [shape=ellipse]
+
+subgraph cluster_header_parser {
+    tcp_or_udp [label="IPClassifier(tcp, udp, -)"]
+    ch_ip_header [label="CheckIPHeader(14)"]
+
+    ch_ip_header -> IPReassembler -> tcp_or_udp;
+    tcp_or_udp -> CheckTCPHeader;
+    tcp_or_udp -> CheckUDPHeader;
+    label = "Header Parser";
+    color = blue;
+    fontcolor = red;
+}
+
+subgraph cluster_header_detector {
+    TCPDetector;
+    UDPDetector;
+    color = blue;
+    label = "Header Detector";
+    fontcolor = red;
+}
+
+subgraph cluster_analyzer {
+    HTTPAnalyzer;
+    SSHAnalyzer;
+    FTPAnalyzer;
+    DNSAnalyzer;
+    label = "Analyzer";
+    color = blue;
+    fontcolor = red;
+}
+
+subgraph cluster_detector {
+    HTTPDetector;
+    SSHDetector;
+    FTPDetector;
+    DNSDetector;
+    label = "Payload Detector";
+    color = blue;
+    fontcolor = red;
+}
+
+FromDevice -> ch_ip_header
+
+CheckTCPHeader -> TCPDetector -> TCPClassifier
+TCPClassifier -> HTTPAnalyzer -> HTTPDetector
+TCPClassifier -> SSHAnalyzer -> SSHDetector
+TCPClassifier -> FTPAnalyzer -> FTPDetector
+
+CheckUDPHeader -> UDPDetector -> UDPClassifier -> DNSAnalyzer -> DNSDetector
+}

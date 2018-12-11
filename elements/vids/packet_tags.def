@@ -1,0 +1,12 @@
+CLICK_DECLS
+
+PTAG_CMD_DEF(NONE)
+
+PTAG_CMD_DEF(MLTSTP)
+PTAG_CMD_DEF(DNS_TUNNEL)
+
+// add new tags just before the LAST and change packet_tag.cc the same time
+
+PTAG_CMD_DEF(LAST)
+
+CLICK_ENDDECLS
